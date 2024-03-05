@@ -1,0 +1,22 @@
+name: Common Deployment Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+    secrets:
+      DEPLOY_TOKEN:
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Deploy to Environment
+        run: |
+          echo "Deploying to ${{ inputs.environment }} with token ${{ secrets.DEPLOY_TOKEN }}"
