@@ -19,4 +19,4 @@ jobs:
       
       - name: Deploy to Environment
         run: |
-          echo "Deploying to ${{ inputs.environment }} with token ${{ secrets.DEPLOY_TOKEN }}"
+          echo "Deploying to ${{ inputs.environment }}"
