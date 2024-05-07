@@ -11,10 +11,29 @@ env:
   NODE_VERSION: '14' # Node.jsのバージョン
 
 jobs:
+
+  deploy-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      # github variable 出力
+      # github.ref: ワークフローがトリガーされたリファレンスまたはブランチ。プルリクエストの場合、この値はプルリクエストのマージブランチになります（例：refs/pull/:prNumber/merge）。
+      # github.ref_name: ワークフローがトリガーされたリファレンスの名前。これはブランチ名またはタグ名になります。
+      # github.head_ref: プルリクエストのソースブランチの名前。プルリクエスト以外のイベントではこの値は空です。
+      # github.base_ref: プルリクエストのターゲットブランチの名前。プルリクエスト以外のイベントではこの値は空です。
+      - name: Print github
+        run: |
+          echo '1' $GITHUB_REF
+          echo '2' ${{ github.ref }}
+          echo '3' ${{ github.ref_name }}
+          echo '4' ${{ github.head_ref }}
+          echo '5' ${{ github.base_ref }}
+
   # 開発環境へのデプロイ
   deploy-dev:
     runs-on: ubuntu-latest
-    # if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/develop'
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
@@ -28,35 +47,35 @@ jobs:
         run: echo "Deploying to Development Environment"
         # 開発環境へのデプロイスクリプトを記述
 
-  # # ステージング環境へのデプロイ
-  # deploy-staging:
-  #   runs-on: ubuntu-latest
-  #   if: github.event_name == 'pull_request' && github.base_ref == 'main'
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v2
+  # ステージング環境へのデプロイ
+  deploy-staging:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: ${{ env.NODE_VERSION }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
-  #     - name: Deploy to Staging Environment
-  #       run: echo "Deploying to Staging Environment"
-  #       # ステージング環境へのデプロイスクリプトを記述
+      - name: Deploy to Staging Environment
+        run: echo "Deploying to Staging Environment"
+        # ステージング環境へのデプロイスクリプトを記述
 
-  # # 本番環境へのデプロイ
-  # deploy-prod:
-  #   runs-on: ubuntu-latest
-  #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-  #   steps:
-  #     - name: Checkout Code
-  #       uses: actions/checkout@v2
+  # 本番環境へのデプロイ
+  deploy-prod:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-  #     - name: Set up Node.js
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: ${{ env.NODE_VERSION }}
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
 
-  #     - name: Deploy to Production Environment
-  #       run: echo "Deploying to Production Environment"
+      - name: Deploy to Production Environment
+        run: echo "Deploying to Production Environment"
