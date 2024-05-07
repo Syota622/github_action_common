@@ -27,9 +27,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - name: Install dependencies
-        run: npm install
-
       - name: Deploy to Development Environment
         run: echo "Deploying to Development Environment"
         # 開発環境へのデプロイスクリプトを記述
@@ -47,12 +44,6 @@ jobs:
   #       with:
   #         node-version: ${{ env.NODE_VERSION }}
 
-  #     - name: Install dependencies
-  #       run: npm install
-
-  #     - name: Build and Test
-  #       run: npm test
-
   #     - name: Deploy to Staging Environment
   #       run: echo "Deploying to Staging Environment"
   #       # ステージング環境へのデプロイスクリプトを記述
@@ -69,9 +60,6 @@ jobs:
   #       uses: actions/setup-node@v2
   #       with:
   #         node-version: ${{ env.NODE_VERSION }}
-
-  #     - name: Install dependencies
-  #       run: npm install
 
   #     - name: Deploy to Production Environment
   #       run: echo "Deploying to Production Environment"
