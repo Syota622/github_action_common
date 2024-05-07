@@ -19,6 +19,7 @@ jobs:
       # github.ref_name: ワークフローがトリガーされたリファレンスの名前。これはブランチ名またはタグ名になります。
       # github.head_ref: プルリクエストのソースブランチの名前。プルリクエスト以外のイベントではこの値は空です。
       # github.base_ref: プルリクエストのターゲットブランチの名前。プルリクエスト以外のイベントではこの値は空です。
+      # github.event_name: イベントの名前。ワークフローがトリガーされたイベントの名前です。例えば、push、pull_request、issuesなどです。
       - name: Print github
         run: |
           echo '1' $GITHUB_REF
