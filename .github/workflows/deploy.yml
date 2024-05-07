@@ -7,12 +7,12 @@ on:
         required: true
         type: string
 
-env:
+env:r
   NODE_VERSION: '14' # Node.jsのバージョン
 
 jobs:
 
-  deploy-dev:
+  github-variable-print:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
