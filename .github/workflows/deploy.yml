@@ -22,12 +22,12 @@ jobs:
       # github.event_name: イベントの名前。ワークフローがトリガーされたイベントの名前です。例えば、push、pull_request、issuesなどです。
       - name: Print github
         run: |
-          echo '1' $GITHUB_REF
-          echo '2' ${{ github.ref }}
-          echo '3' ${{ github.ref_name }}
-          echo '4' ${{ github.head_ref }}
-          echo '5' ${{ github.base_ref }}
-          echo '6' ${{ github.event_name }}
+          echo '1 $GITHUB_REF:'       $GITHUB_REF
+          echo '2 github.ref:'        ${{ github.ref }}
+          echo '3 github.ref_name:'   ${{ github.ref_name }}
+          echo '4 github.head_ref:'   ${{ github.head_ref }}
+          echo '5 github.base_ref:'   ${{ github.base_ref }}
+          echo '6 github.event_name:' ${{ github.event_name }}
 
   # 開発環境へのデプロイ
   deploy-dev:
