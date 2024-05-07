@@ -3,12 +3,9 @@ name: Common Deployment Workflow
 on:
   workflow_call:
     inputs:
-      environment:
+      ENV_VAR:
         required: true
         type: string
-
-env:
-  NODE_VERSION: '14' # Node.jsのバージョン
 
 jobs:
 
@@ -39,13 +36,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Deploy to Development Environment
-        run: echo "Deploying to Development Environment"
+      - name: Deploy to Development ENV_VAR
+        run: echo ${{ env.ENV_VAR }}
         # 開発環境へのデプロイスクリプトを記述
 
   # ステージング環境へのデプロイ
@@ -56,13 +48,8 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Deploy to Staging Environment
-        run: echo "Deploying to Staging Environment"
+      - name: Deploy to Staging ENV_VAR
+        run: echo ${{ inputs.ENV_VAR }}
         # ステージング環境へのデプロイスクリプトを記述
 
   # 本番環境へのデプロイ
@@ -73,10 +60,5 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-
-      - name: Deploy to Production Environment
-        run: echo "Deploying to Production Environment"
+      - name: Deploy to Production ENV_VAR
+        run: echo ${{ inputs.ENV_VAR }}
