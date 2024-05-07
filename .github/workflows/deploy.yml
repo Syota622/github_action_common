@@ -6,9 +6,6 @@ on:
       environment:
         required: true
         type: string
-    secrets:
-      DEPLOY_TOKEN:
-        required: true
 
 env:
   NODE_VERSION: '14' # Node.jsのバージョン
