@@ -29,7 +29,7 @@ jobs:
           echo '5 github.base_ref:'   ${{ github.base_ref }}
           echo '6 github.event_name:' ${{ github.event_name }}
 
-  deploy-dev:
+  deploy-to-env-var:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
