@@ -10,6 +10,12 @@ on:
       SLACK_WEBHOOK_URL_FAILED:
         required: true
 
+
+# common env
+env:
+  ENV_SLACK_WEBHOOK_URL_FAILED: ${{ secrets.SLACK_WEBHOOK_URL_FAILED }}
+
+
 jobs:
   github-variable-print:
     runs-on: ubuntu-latest
@@ -41,4 +47,6 @@ jobs:
         run: echo ${{ inputs.ENV_VAR }}
 
       - name: Deploy to Development SLACK_WEBHOOK_URL_FAILED
-        run: echo ${{ secrets.SLACK_WEBHOOK_URL_FAILED }}
+        run: |
+          - echo ${{ secrets.SLACK_WEBHOOK_URL_FAILED }}
+          - echo ${{ env.ENV_SLACK_WEBHOOK_URL_FAILED }}
