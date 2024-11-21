@@ -6,9 +6,11 @@ on:
       ENV_VAR:
         required: true
         type: string
+    secrets:
+      SLACK_WEBHOOK_URL_STG:
+        required: true
 
 jobs:
-
   github-variable-print:
     runs-on: ubuntu-latest
     steps:
@@ -37,3 +39,6 @@ jobs:
 
       - name: Deploy to Development ENV_VAR
         run: echo ${{ inputs.ENV_VAR }}
+
+      - name: Deploy to Development SLACK_WEBHOOK_URL_FAILED
+        run: echo ${{ secrets.SLACK_WEBHOOK_URL_STG }}
