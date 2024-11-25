@@ -61,7 +61,7 @@ jobs:
       - name: Slack Notification on Failure
         uses: rtCamp/action-slack-notify@v2.3.2
         # if: failure()
-        if: failure() && steps.fail_step.outcome == 'failure'
+        if: always() && (github.run_status != 'success' || failure())
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FAILED }}
           SLACK_TITLE: GitHub Actions 失敗通知
