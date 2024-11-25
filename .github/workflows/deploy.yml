@@ -60,7 +60,8 @@ jobs:
       # 失敗時はこちらのステップが実行される
       - name: Slack Notification on Failure
         uses: rtCamp/action-slack-notify@v2.3.2
-        if: failure()
+        # if: failure()
+        if: failure() && steps.fail_step.outcome == 'failure'
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FAILED }}
           SLACK_TITLE: GitHub Actions 失敗通知
