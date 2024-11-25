@@ -60,19 +60,29 @@ jobs:
       # 失敗時はこちらのステップが実行される
       - name: Slack Notification on Failure
         uses: rtCamp/action-slack-notify@v2.3.2
-        if: failure()
+        if: contains(needs.*.result, 'failure')  # どれかのjobが失敗した場合
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FAILED }}
           SLACK_TITLE: GitHub Actions 失敗通知
           SLACK_COLOR: danger
-          SLACK_MESSAGE: '<!here> SLACK_WEBHOOK_URL_FAILEDワークフロー "${{ github.workflow }}" のジョブ "${{ github.job }}" が失敗しました。'
+          SLACK_MESSAGE: |
+            <!here> GitHub Actionsが失敗しました
+            ワークフロー: ${{ github.workflow }}
+            リポジトリ: ${{ github.repository }}
+            ブランチ: ${{ github.ref_name }}
+            実行URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
       # 失敗時はこちらのステップが実行される
       - name: Slack Notification on Failure
         uses: rtCamp/action-slack-notify@v2.3.2
-        if: failure()
+        if: contains(needs.*.result, 'failure')  # どれかのjobが失敗した場合
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_FAILED_2 }}
           SLACK_TITLE: GitHub Actions 失敗通知
           SLACK_COLOR: danger
-          SLACK_MESSAGE: '<!here> SLACK_WEBHOOK_URL_FAILED_2ワークフロー "${{ github.workflow }}" のジョブ "${{ github.job }}" が失敗しました。'
+          SLACK_MESSAGE: |
+            <!here> GitHub Actionsが失敗しました
+            ワークフロー: ${{ github.workflow }}
+            リポジトリ: ${{ github.repository }}
+            ブランチ: ${{ github.ref_name }}
+            実行URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
