@@ -23,6 +23,11 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      # わざと失敗させるステップを追加
+      - name: Force Failure
+        run: exit 1
+
       # github variable 出力
       # github.ref: ワークフローがトリガーされたリファレンスまたはブランチ。プルリクエストの場合、この値はプルリクエストのマージブランチになります（例：refs/pull/:prNumber/merge）。
       # github.ref_name: ワークフローがトリガーされたリファレンスの名前。これはブランチ名またはタグ名になります。
